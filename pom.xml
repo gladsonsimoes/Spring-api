@@ -14,9 +14,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>JavaSpring-api</name>
 	<description>Minha API de Java feita em Spring Boot</description>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
+	<!-- Dependencias Spring Initializr -->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

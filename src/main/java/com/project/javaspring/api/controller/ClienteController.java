@@ -5,11 +5,9 @@ import com.project.javaspring.domain.repository.ClienteRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,4 +32,33 @@ public class ClienteController {
                 .map(ResponseEntity::ok) //se caso existir 200 OK
                 .orElse(ResponseEntity.notFound().build()); //senão 404
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED) //definir como resposta 201
+    public  Cliente adicionar(@RequestBody Cliente cliente){ //vinculando o corpo da requisição com o argumento cliente
+        return clienteRepository.save(cliente);
+    }
+
+    @PutMapping("/{clienteId}")
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteId, @RequestBody Cliente cliente){
+        if (!clienteRepository.existsById(clienteId)){
+            return ResponseEntity.notFound().build();
+        }
+        cliente.setId(clienteId); //para identificar que tem um id para atualizar em vez criar um novo
+        cliente = clienteRepository.save(cliente);
+
+        return ResponseEntity.ok(cliente);
+    }
+
+    @DeleteMapping("/{clienteId}")
+    public ResponseEntity<Void> remover(@PathVariable  Long clienteId){
+        if (!clienteRepository.existsById(clienteId)){
+            return ResponseEntity.notFound().build();
+        }
+
+        clienteRepository.deleteById(clienteId);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }

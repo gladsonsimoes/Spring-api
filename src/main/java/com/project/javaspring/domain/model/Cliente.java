@@ -1,14 +1,32 @@
 package com.project.javaspring.domain.model;
 
+import jakarta.persistence.*;
 
+import java.util.Objects;
 
+@Entity
 public class Cliente {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
     private String email;
     private String telefone;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cliente)) return false;
+        Cliente cliente = (Cliente) o;
+        return getId().equals(cliente.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
     public Long getId() {
         return id;

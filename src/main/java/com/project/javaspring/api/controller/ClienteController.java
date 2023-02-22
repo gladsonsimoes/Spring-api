@@ -2,18 +2,14 @@ package com.project.javaspring.api.controller;
 
 import com.project.javaspring.domain.model.Cliente;
 import com.project.javaspring.domain.repository.ClienteRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/clientes") //em vez de usar a requisição /clientes em cada requisição

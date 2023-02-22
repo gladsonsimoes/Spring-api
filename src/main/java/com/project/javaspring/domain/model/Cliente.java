@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.bind.Name;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
@@ -21,16 +22,16 @@ public class Cliente {
     private Long id;
 
     @NotBlank //evitar null e branco
-    @Size( max = 60) //definir o caractere maximo
+    @Size( max = 60 , min = 2) //definir o caractere maximo
     private String nome;
 
     @NotBlank
     @Email
-    @Size( max = 255)
+    @Size( max = 255 )
     private String email;
 
     @NotBlank
-    @Size( max = 20)
+    @Size( min = 11 , max = 14 )
     private String telefone;
 
 }
